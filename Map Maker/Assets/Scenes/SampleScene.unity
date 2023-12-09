@@ -331,6 +331,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MapFile: {fileID: 4900000, guid: 0dc20f8a7d12d4ca889a7d7048d86d89, type: 3}
+  Size: 4
+  FloorPrefab: {fileID: 2629887137335619351, guid: f56316fce851145208dbce84da62eab4, type: 3}
+  WallPrefab: {fileID: 5092408369250796850, guid: 4f3a358f9d37042f4a0ad7a1bbc1d1e9, type: 3}
+  PillarPrefab: {fileID: 2629887137335619351, guid: 50c8af260fca448d1a5d885a87e432ef, type: 3}
+  DoorwayPrefab: {fileID: 2629887137335619351, guid: 3fdfa163a21f24d3bab65c7858abac04, type: 3}
 --- !u!4 &1910917800
 Transform:
   m_ObjectHideFlags: 0
