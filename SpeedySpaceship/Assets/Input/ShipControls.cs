@@ -35,6 +35,15 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Shoot"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc771129-4105-4346-ab88-50a061c8f27e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3ce523e-484b-42d8-b2b0-38756b95156c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shoot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -118,6 +138,7 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
         // Ship
         m_Ship = asset.FindActionMap("Ship", throwIfNotFound: true);
         m_Ship_Move = m_Ship.FindAction("Move", throwIfNotFound: true);
+        m_Ship_Shoot = m_Ship.FindAction("Shoot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -178,11 +199,13 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Ship;
     private IShipActions m_ShipActionsCallbackInterface;
     private readonly InputAction m_Ship_Move;
+    private readonly InputAction m_Ship_Shoot;
     public struct ShipActions
     {
         private @ShipControls m_Wrapper;
         public ShipActions(@ShipControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Ship_Move;
+        public InputAction @Shoot => m_Wrapper.m_Ship_Shoot;
         public InputActionMap Get() { return m_Wrapper.m_Ship; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -195,6 +218,9 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
                 @Move.started -= m_Wrapper.m_ShipActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_ShipActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_ShipActionsCallbackInterface.OnMove;
+                @Shoot.started -= m_Wrapper.m_ShipActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_ShipActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_ShipActionsCallbackInterface.OnShoot;
             }
             m_Wrapper.m_ShipActionsCallbackInterface = instance;
             if (instance != null)
@@ -202,6 +228,9 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
             }
         }
     }
@@ -218,5 +247,6 @@ public partial class @ShipControls : IInputActionCollection2, IDisposable
     public interface IShipActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnShoot(InputAction.CallbackContext context);
     }
 }
