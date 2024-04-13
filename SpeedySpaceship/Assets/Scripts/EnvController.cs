@@ -22,8 +22,7 @@ public class EnvController : MonoBehaviour
     Preload();
   }
 
-  // Update is called once per frame
-  void Update()
+  void FixedUpdate()
   {
     if (_lastGo == null)
       return;
@@ -32,7 +31,9 @@ public class EnvController : MonoBehaviour
                                          _spawnPoint);
     if (distToLast >= Spacing)
     {
-      _lastGo = CreatePrefab(_spawnPoint);
+      Vector3 spawnAt = _lastGo.transform.position + Vector3.right * Spacing;
+
+      _lastGo = CreatePrefab(spawnAt);
     }
   }
 
