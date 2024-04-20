@@ -9,6 +9,9 @@ public class EnvController : MonoBehaviour
   public float Speed = 50.0f;
   public int Count = 6;
 
+  public float ChanceOfObstacle = 0.2f;
+  public GameObject[] ObstaclePrefabs;
+
   private Vector3 _spawnPoint;
   private GameObject _lastGo;
 
@@ -42,11 +45,11 @@ public class EnvController : MonoBehaviour
     for (int i = 0; i < Count; i++)
     {
       Vector3 pos = Vector3.right * i * Spacing;
-      _lastGo = CreatePrefab(pos);
+      _lastGo = CreatePrefab(pos, false);
     }
   }
 
-  private GameObject CreatePrefab(Vector3 position)
+  private GameObject CreatePrefab(Vector3 position, bool createObstacles = true)
   {
     // Pick a random prefab
     int numPrefabs = EnvPrefabs.Length;
@@ -65,7 +68,27 @@ public class EnvController : MonoBehaviour
     MoveWithEnvironment mwe = go.AddComponent<MoveWithEnvironment>();
     mwe.EnvController = this;
 
+    // Create obstacle?
+    if (createObstacles && Random.value <= ChanceOfObstacle)
+    {
+      // Create an obstacle as a child of this piece of env
+      CreateObstacle(position, go.transform);
+    }
+
     // Return it
     return go;
+  }
+
+  private void CreateObstacle(Vector3 position, Transform transform)
+  {
+    // Pick a random prefab
+    int numPrefabs = ObstaclePrefabs.Length;
+    GameObject prefab = ObstaclePrefabs[Random.Range(0, numPrefabs)];
+
+    // Create an instance of it
+    Quaternion rotation = Quaternion.Euler(0, -90, 0);
+    GameObject go = Instantiate(prefab, position,
+                                rotation, transform);
+
   }
 }

@@ -99,4 +99,9 @@ public class ShipController : MonoBehaviour
   {
     _controls.Disable();
   }
+
+  private void OnTriggerEnter(Collider other)
+  {
+    Debug.Log("I hit something");
+  }
 }

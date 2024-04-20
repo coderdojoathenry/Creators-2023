@@ -168,8 +168,20 @@ MonoBehaviour:
   - {fileID: 4945054839695188738, guid: b8c229e90a159407e8309b5e82442805, type: 3}
   - {fileID: 6552455109591947798, guid: 2e9d756d8c4f84db08dae509e3cfc791, type: 3}
   Spacing: 100
-  Speed: 50
+  Speed: 150
   Count: 6
+  ChanceOfObstacle: 0.5
+  ObstaclePrefabs:
+  - {fileID: 3031436617617477655, guid: 4ec64b988cb424185ac6b868ff629949, type: 3}
+  - {fileID: 4374956025374057801, guid: 975ebbdf7847a4b4f90419bfe6527c61, type: 3}
+  - {fileID: 7072950559368351014, guid: e6763b37a8ec346d084d3e7ff61242fe, type: 3}
+  - {fileID: 912489187078221696, guid: 3b50d22f41ac54043a8dcb7b9f559ae6, type: 3}
+  - {fileID: 4543743732632858393, guid: d4b2f8a13c44a449d895a7de61571581, type: 3}
+  - {fileID: 2792030566072347232, guid: 0d7883ea2d71c4b269191c75c2e981fe, type: 3}
+  - {fileID: 1804043605433606566, guid: 67503b47a049b4a8fadda4754f526b38, type: 3}
+  - {fileID: 8622792254820968421, guid: 309a344e7c55b4d9fa53e8926649ef7b, type: 3}
+  - {fileID: 7910566804047791568, guid: 8b99bf5e545e94f74b3e9876bb116cb0, type: 3}
+  - {fileID: 4990810113469625690, guid: fde94d15dfbaf43c081349b5d16d5db9, type: 3}
 --- !u!4 &241104375
 Transform:
   m_ObjectHideFlags: 0
@@ -373,13 +385,15 @@ GameObject:
   m_Component:
   - component: {fileID: 1048099972}
   - component: {fileID: 1048099973}
+  - component: {fileID: 1048099974}
+  - component: {fileID: 1048099975}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1048099972
 Transform:
   m_ObjectHideFlags: 0
@@ -416,6 +430,35 @@ MonoBehaviour:
   MissilePrefab: {fileID: 6165453835187374249, guid: ed35548f504f5480cb25136fddde3cef, type: 3}
   MissileSpawnPoint: {fileID: 1888860483}
   FireRate: 4
+--- !u!54 &1048099974
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048099968}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &1048099975
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048099968}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 9.218888, y: 2.379705, z: 6.1959143}
+  m_Center: {x: -0.8730073, y: 0.19527793, z: 0.034460545}
 --- !u!1 &1841724503
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,7 +478,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1841724504
 MeshCollider:
   m_ObjectHideFlags: 0
