@@ -62,7 +62,7 @@ public class EnvController : MonoBehaviour
 
     // Add DestroyAfterDistance to it
     DestroyAfterDistance dad = go.AddComponent<DestroyAfterDistance>();
-    dad.Distance = 700.0f;
+    dad.Distance = 1000.0f;
 
     // Add MoveWithEnvironment to it
     MoveWithEnvironment mwe = go.AddComponent<MoveWithEnvironment>();

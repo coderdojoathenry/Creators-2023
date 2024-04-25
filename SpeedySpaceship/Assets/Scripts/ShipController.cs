@@ -19,9 +19,12 @@ public class ShipController : MonoBehaviour
   private float _minTimeBetweenShots;
   private float _lastShotTime = -10.0f;
 
+  private AudioSource _audioSource;
+
   private void Awake()
   {
     _controls = new ShipControls();
+    _audioSource = GetComponent<AudioSource>();
   }
 
   // Start is called before the first frame update
@@ -88,6 +91,9 @@ public class ShipController : MonoBehaviour
                 MissileSpawnPoint.rotation);
 
     _lastShotTime = Time.time;
+
+    if (_audioSource != null)
+      _audioSource.Play();
   }
 
   private void OnEnable()
