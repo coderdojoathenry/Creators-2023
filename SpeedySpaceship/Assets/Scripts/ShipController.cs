@@ -9,6 +9,9 @@ public class ShipController : MonoBehaviour
   public float TiltSpeed = 10.0f;
   public float TiltLimit = 10.0f;
 
+  public GameObject StandardShip;
+  public GameObject InvulnerableShip;
+
   public Vector2 Bounds;
 
   public GameObject MissilePrefab;
@@ -18,6 +21,10 @@ public class ShipController : MonoBehaviour
   private ShipControls _controls;
   private float _minTimeBetweenShots;
   private float _lastShotTime = -10.0f;
+  private bool _shootingDisabled = false;
+
+  private AudioSource _audioSource;
+  private Collider _collider;
 
   private void Awake()
   {
@@ -28,6 +35,8 @@ public class ShipController : MonoBehaviour
   void Start()
   {
     _minTimeBetweenShots = 1.0f / FireRate;
+    _audioSource = GetComponent<AudioSource>();
+    _collider = GetComponent<Collider>();
   }
 
   // Update is called once per frame
@@ -71,7 +80,8 @@ public class ShipController : MonoBehaviour
                                           rotationProportion);
 
     // Shooting
-    if (_controls.Ship.Shoot.WasPerformedThisFrame())
+    if (_shootingDisabled == false &&
+        _controls.Ship.Shoot.WasPerformedThisFrame())
     {
       Shoot();
     }
@@ -88,6 +98,9 @@ public class ShipController : MonoBehaviour
                 MissileSpawnPoint.rotation);
 
     _lastShotTime = Time.time;
+
+    if (_audioSource != null)
+      _audioSource.Play();
   }
 
   private void OnEnable()
@@ -102,6 +115,32 @@ public class ShipController : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
-    Debug.Log("I hit something");
+    SetModeInvulnerable();
   }
+
+  private void SetMode(bool isInvulnerable)
+  {
+    // Set the ship models on/off
+    StandardShip.SetActive(!isInvulnerable);
+    InvulnerableShip.SetActive(isInvulnerable);
+
+    // Set shooting on/off
+    _shootingDisabled = isInvulnerable;
+
+    // Set contact on/off
+    _collider.enabled = !isInvulnerable;
+  }
+
+  public void SetModeNormal()
+  {
+    SetMode(false);
+  }
+
+  public void SetModeInvulnerable()
+  {
+    SetMode(true);
+
+    Invoke("SetModeNormal", 2.0f);
+  }
+
 }
