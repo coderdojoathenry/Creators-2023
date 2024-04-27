@@ -9,11 +9,6 @@ public class DestroyAfterSeconds : MonoBehaviour
   // Start is called before the first frame update
   void Start()
   {
-    Invoke("DestroyGameObject", TimeToLive);      
-  }
-
-  private void DestroyGameObject()
-  {
-    Destroy(gameObject);
+    Destroy(gameObject, TimeToLive);
   }
 }
