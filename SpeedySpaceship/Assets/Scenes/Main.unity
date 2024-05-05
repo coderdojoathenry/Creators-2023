@@ -182,6 +182,9 @@ MonoBehaviour:
   - {fileID: 8622792254820968421, guid: 309a344e7c55b4d9fa53e8926649ef7b, type: 3}
   - {fileID: 7910566804047791568, guid: 8b99bf5e545e94f74b3e9876bb116cb0, type: 3}
   - {fileID: 4990810113469625690, guid: fde94d15dfbaf43c081349b5d16d5db9, type: 3}
+  ChanceOfEnemy: 0.5
+  EnemyPrefabs:
+  - {fileID: 4848172346374567947, guid: acb427914fc2e424f898c90b22c02200, type: 3}
 --- !u!4 &241104375
 Transform:
   m_ObjectHideFlags: 0
