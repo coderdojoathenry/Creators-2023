@@ -118,6 +118,11 @@ public class ShipController : MonoBehaviour
     SetModeInvulnerable();
   }
 
+  private void OnCollisionEnter(Collision collision)
+  {
+    SetModeInvulnerable();
+  }
+
   private void SetMode(bool isInvulnerable)
   {
     // Set the ship models on/off
