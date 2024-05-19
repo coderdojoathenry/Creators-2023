@@ -18,6 +18,8 @@ public class ShipController : MonoBehaviour
   public Transform MissileSpawnPoint;
   public float FireRate = 1.0f;
 
+  public AudioClip AlertSound;
+
   private ShipControls _controls;
   private float _minTimeBetweenShots;
   private float _lastShotTime = -10.0f;
@@ -26,9 +28,12 @@ public class ShipController : MonoBehaviour
   private AudioSource _audioSource;
   private Collider _collider;
 
+  private GameManager _gm;
+
   private void Awake()
   {
     _controls = new ShipControls();
+    _gm = FindObjectOfType<GameManager>();
   }
 
   // Start is called before the first frame update
@@ -118,8 +123,30 @@ public class ShipController : MonoBehaviour
     SetModeInvulnerable();
   }
 
+  private void OnCollisionEnter(Collision collision)
+  {
+    SetModeInvulnerable();
+  }
+
   private void SetMode(bool isInvulnerable)
   {
+    // Have we just been hit or crashed?
+    if (isInvulnerable)
+    {
+      // Tell the game manager we've lost a life
+      if (_gm != null)
+        _gm.LoseLife();
+
+      // Alarm sound 
+      if (_audioSource != null && AlertSound != null)
+      {
+        _audioSource.PlayOneShot(AlertSound);
+      }
+
+    }
+
+
+
     // Set the ship models on/off
     StandardShip.SetActive(!isInvulnerable);
     InvulnerableShip.SetActive(isInvulnerable);

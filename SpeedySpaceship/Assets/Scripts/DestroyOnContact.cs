@@ -8,11 +8,21 @@ public class DestroyOnContact : MonoBehaviour
 
   private void OnTriggerEnter(Collider other)
   {
+    DoDestroy(other.transform);
+  }
+
+  private void OnCollisionEnter(Collision collision)
+  {
+    DoDestroy(null);
+  }
+
+  private void DoDestroy(Transform otherTransform)
+  {
     if (DestroyPrefab != null)
     {
       Instantiate(DestroyPrefab, transform.position,
                                  transform.rotation,
-                                 other.transform);
+                                 otherTransform);
     }
 
     Destroy(gameObject);

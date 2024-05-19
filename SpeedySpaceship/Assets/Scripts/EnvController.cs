@@ -12,6 +12,9 @@ public class EnvController : MonoBehaviour
   public float ChanceOfObstacle = 0.2f;
   public GameObject[] ObstaclePrefabs;
 
+  public float ChanceOfEnemy = 0.5f;
+  public GameObject[] EnemyPrefabs;
+
   private Vector3 _spawnPoint;
   private GameObject _lastGo;
 
@@ -74,9 +77,24 @@ public class EnvController : MonoBehaviour
       // Create an obstacle as a child of this piece of env
       CreateObstacle(position, go.transform);
     }
+    else if(createObstacles && Random.value <= ChanceOfEnemy)
+    {
+      CreateEnemy(position, go.transform);
+    }
 
     // Return it
     return go;
+  }
+
+  private void CreateEnemy(Vector3 position, Transform transform)
+  {
+    // Pick a random prefab
+    int numPrefabs = EnemyPrefabs.Length;
+    GameObject prefab = EnemyPrefabs[Random.Range(0, numPrefabs)];
+
+    // Create an instance of it
+    GameObject go = Instantiate(prefab, position,
+                                Quaternion.identity, transform);
   }
 
   private void CreateObstacle(Vector3 position, Transform transform)
