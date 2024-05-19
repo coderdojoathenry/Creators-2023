@@ -13,7 +13,7 @@ public class DestroyOnContact : MonoBehaviour
 
   private void OnCollisionEnter(Collision collision)
   {
-    DoDestroy(collision.gameObject.transform);
+    DoDestroy(null);
   }
 
   private void DoDestroy(Transform otherTransform)

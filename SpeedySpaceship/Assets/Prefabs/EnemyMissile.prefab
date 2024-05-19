@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7294397933592321392}
   - component: {fileID: 1045472284979106557}
   - component: {fileID: 1011112317183690266}
+  - component: {fileID: 4219518217640385599}
   - component: {fileID: 164970684242589906}
   m_Layer: 0
   m_Name: EnemyMissile
@@ -93,6 +94,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4219518217640385599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6165453835187374249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35c48217a97548119fb2f1e8484c303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 50
 --- !u!114 &164970684242589906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aade52d49f6474f36a46e8aeb1603ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyPrefab: {fileID: 218543952269355277, guid: c06a65534ac1545488a3073f9aab134f, type: 3}
+  DestroyPrefab: {fileID: 218543952269355277, guid: 4cee92dac7cbb40afbb3fe529a091eb9, type: 3}
 --- !u!1 &6178723102093276796
 GameObject:
   m_ObjectHideFlags: 0
